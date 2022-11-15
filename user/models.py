@@ -1,10 +1,4 @@
-from email.policy import default
-from enum import unique
-from ftplib import MAXLINE
 from multiprocessing.managers import BaseManager
-from operator import mod
-from pyexpat import model
-import re
 from urllib import request
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
