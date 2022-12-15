@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'rest_framework_swagger',
 
     'user',
     'apartment',
@@ -39,16 +38,34 @@ INSTALLED_APPS = [
     'news',
     'others',
 
+    'drf_yasg',
     'baton.autodiscover'
 ]
 
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },         
+      'JSON_EDITOR': True,
+       
+}
+
+
+LOGIN_URL = 'http://127.0.0.1:8000/user/login/'
 
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    # 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 
 }
 

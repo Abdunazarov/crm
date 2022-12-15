@@ -1,7 +1,7 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
 
 from .serializers import RequestSerializer, RequestUpdateSerializer
@@ -12,7 +12,6 @@ from request_buy.models import RequestBuy
 class ListRequestsView(ListAPIView):
     queryset = RequestSell.objects.all()
     serializer_class = RequestSerializer
-    permission_classes = []
 
     filter_backends = (filters.SearchFilter,)
     search_fields = ['location', 'status', 'id']
@@ -20,7 +19,6 @@ class ListRequestsView(ListAPIView):
 
 # CREATE
 @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
 def create_request(request):
 
     serializer = RequestSerializer(data=request.data)
@@ -34,7 +32,6 @@ def create_request(request):
 
 # UPDATE
 @api_view(['PUT'])
-# @permission_classes([IsAuthenticated])
 def update_request(request, pk):
     r = RequestSell.objects.get(id=pk)
     data = {'Response': 'Error while updating Request'}
@@ -50,7 +47,6 @@ def update_request(request, pk):
 
 # DELETE
 @api_view(['DELETE'])
-# @permission_classes([IsAuthenticated])
 def delete_request(request, pk):
     data = {'Response': 'Failed to delete'}
     r  = RequestSell.objects.get(id=pk)
@@ -66,7 +62,6 @@ from datetime import datetime
 
 # GET ONE
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
 def get_one_request(request, pk):
     r  = RequestSell.objects.get(id=pk)
     r.passed_deadline()
@@ -75,5 +70,4 @@ def get_one_request(request, pk):
     serializer = RequestSerializer(r)
 
     return Response(serializer.data)
-
 

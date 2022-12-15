@@ -8,8 +8,9 @@ from .models import Apartment
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def create_apartment(request):
+    '''Yangi obyekt yaratish uchun API, obyektni rieltori avtomatik ravishda Http Headersda kevotgan userni (rieltorni) obyekt avtori qilib qo'yadi'''
+
     author = request.user
 
     apartment = Apartment(author=author)
@@ -24,8 +25,8 @@ def create_apartment(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def get_apartments(request):
+    '''Barcha obyektlarni get qilish uchun API'''
     all = Apartment.objects.all()
     serializer = ApartmentSerializer(all, many=True)
 
@@ -34,8 +35,8 @@ def get_apartments(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def detail_apartment(request, pk):
+    '''Yagona obyektni get qilish uchun API'''
     apartment = Apartment.objects.get(id=pk)
     serializer = ApartmentSerializer(apartment)
 
@@ -43,8 +44,9 @@ def detail_apartment(request, pk):
 
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
 def update_apartment(request, pk):
+    '''Obyektni update/edit/yangilash ucuhn API
+    1) Obyektni faqatgina obyektni avtori va superadmin (admin stranitsasidan) update qila oladi'''
     apartment = Apartment.objects.get(id=pk)
     user = request.user
 
@@ -61,8 +63,10 @@ def update_apartment(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
 def delete_apartment(request, pk):
+    '''Obyektni bazadan o'chirish uchun API
+    1) Obyektni faqatgina obyektni avtori, yani obyektni yaratgan rieltorgina va superadmin o'chira oladi'''
+
     apartment = Apartment.objects.get(id=pk)
     user = request.user
     data = {'Response': 'Could not delete the Apartment object'}

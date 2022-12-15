@@ -53,5 +53,5 @@ class RequestBuy(models.Model):
         verbose_name_plural = 'Заявки на покупку'
 
     def __str__(self):
-        return self.status
+        return '#' + str(self.id) + ' - ' + self.buyer_full_name 
 

@@ -1,4 +1,4 @@
-#!/home/diyor/Dev/crm/env/bin/python3
+#!/home/diyor/Dev/main/crm/env/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

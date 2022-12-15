@@ -5,6 +5,7 @@ from .models import *
 
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
+        ref_name = 'RequestSerializerBuy'
         fields = '__all__'
         model = RequestBuy
 

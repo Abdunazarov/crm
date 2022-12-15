@@ -11,15 +11,13 @@ from request_sell.models import RequestSell
 
 # Create
 @api_view(['POST'])
-@permission_classes([IsAuthenticated]) # coz only superuser can create Rieltors
 def register_rieltor(request):
     data = {}
 
     user = request.user
 
     if user.is_superuser != True:
-        return Response({'Error': 'You are not a superuser, thus cannot create a rieltor'})
-
+        return Response({'Error': 'You are not a superuser, you cannot create a rieltor'})
     
 
     serializer = UserSerializer(data=request.data)
@@ -37,9 +35,15 @@ def register_rieltor(request):
     return Response(serializer.errors)
 
 
+
+
+    
+
+
+
+
 # GET PROFILE 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def profile(request):
     user = request.user
 
@@ -69,7 +73,6 @@ def profile(request):
 
 # Update 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
 def update_user(request):
     user = request.user
 
@@ -85,11 +88,11 @@ def update_user(request):
 
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
 def all_users(request):
     users = User.objects.all()
 
     serializer = UserSerializer(users, many=True)
 
     return Response(serializer.data)
+
 

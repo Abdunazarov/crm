@@ -1,7 +1,6 @@
 from urllib.robotparser import RequestRate
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
 from rest_framework import filters
 
@@ -20,7 +19,6 @@ class ListRequestsView(ListAPIView):
 
 # CREATE
 @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
 def create_request(request):
 
     serializer = RequestSerializer(data=request.data)
@@ -34,7 +32,6 @@ def create_request(request):
 
 # UPDATE
 @api_view(['PUT'])
-# @permission_classes([IsAuthenticated])
 def update_request(request, pk):
     r = RequestBuy.objects.get(id=pk)
     data = {'Response': 'Error while updating Request'}
@@ -50,7 +47,6 @@ def update_request(request, pk):
 
 # DELETE
 @api_view(['DELETE'])
-# @permission_classes([IsAuthenticated])
 def delete_request(request, pk):
     data = {'Response': 'Failed to delete'}
     r  = RequestBuy.objects.get(id=pk)
@@ -65,7 +61,6 @@ def delete_request(request, pk):
 
 # GET ONE
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
 def get_one_request(request, pk):
     r  = RequestBuy.objects.get(id=pk)
 
